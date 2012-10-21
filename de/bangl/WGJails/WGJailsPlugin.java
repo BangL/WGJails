@@ -104,16 +104,4 @@ public class WGJailsPlugin extends SPlugin {
             }
         });
     }
-
-    public WorldGuardPlugin getWGP() {
-        return pluginWorldGuard;
-    }
-
-    public WGCustomFlagsPlugin getWGCFP() {
-        return pluginWGCustomFlags;
-    }
-
-    public Boolean hasWGCommandFlags() {
-        return hasWGCommandFlags;
-    }
 }
