@@ -1,7 +1,7 @@
-name: SwornJail
-main: com.minesworn.swornjail.SwornJail
-author: t7seven7t
-version: 2.0
+name: WGJails
+main: de.bangl.WGJails.WGJailsPlugin
+author: [ t7seven7t, BangL ]
+version: 0.1
 description: >
              Simple single region defined jail system.
 commands:
