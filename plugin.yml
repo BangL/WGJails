@@ -1,0 +1,110 @@
+name: SwornJail
+main: com.minesworn.swornjail.SwornJail
+author: t7seven7t
+version: 2.0
+description: >
+             Simple single region defined jail system.
+commands:
+    jail:
+        description: Jails a player.
+        permission: swornjail.jail
+        usage: /<command> <player> <time> <reason>
+    unjail:
+        description: Unjails a player.
+        permission: swornjail.unjail
+        usage: /<command> <player>
+    jailcheck:
+        description: Checks a player's jail status.
+        permission: swornjail.check
+        usage: /<command> <player>
+    jailreason:
+        description: Modifies a player's jail reason.
+        permission: swornjail.modify.reason
+        usage: /<command> <player> <reason>
+    jailmute:
+        description: Mutes a jailed player.
+        permission: swornjail.mute
+        usage: /<command> <player>
+    jailset:
+        description: Set the region of the jail.
+        permission: swornjail.set
+        usage: |
+                Usage:
+                /<command>
+                /<command> cancel
+    jailstatus:
+        description: Check your jail status.
+        permission: swornjail.status
+        usage: /<command>
+    jailtime:
+        description: Change jail time for a player.
+        permission: swornjail.modify.time
+        usage: /<command> <player> <time>
+    jailhelp:
+        description: Shows jail help.
+        permission: swornjail.help
+        usage: /<command>
+    jailreload:
+        description: Reloads jail.
+        permission: swornjail.reload
+        usage: /<command>
+permissions:
+    swornjail.admin:
+        description: Gives access to all SwornJail commands.
+        children:
+            swornjail.canusecommands: true
+            swornjail.moderator: true
+            swornjail.set: true
+            swornjail.build: true
+            swornjail.reload: true
+    swornjail.moderator:
+        description: Gives access to moderator commands.
+        children:
+            swornjail.unjail: true
+            swornjail.jail: true
+            swornjail.check: true
+            swornjail.mute: true
+            swornjail.modify.time: true
+            swornjail.modify.reason: true
+            swornjail.default: true
+    swornjail.default:
+        description: Gives access to default player commands.
+        children:
+            swornjail.status: true
+            swornjail.help: true
+    swornjail.jail:
+        description: Gives access to jail command.
+        default: op
+    swornjail.unjail:
+        description: Gives access to unjail command.
+        default: op
+    swornjail.check:
+        description: Gives access to jailcheck command.
+        default: op
+    swornjail.mute:
+        description: Gives access to mute command.
+        default: op
+    swornjail.set:
+        description: Gives access to jailset command.
+        default: op
+    swornjail.status:
+        description: Gives access to jailstatus command.
+        default: true
+    swornjail.modify.reason:
+        description: Gives access to jailreason command.
+        default: op
+    swornjail.modify.time:
+        description: Gives access to jailtime command.
+        default: op
+    swornjail.help:
+        description: Gives access to help command.
+        default: true
+    swornjail.build:
+        description: Allows user to build in jail.
+        default: false
+    swornjail.canusecommands:
+        description: Allows user to use commands in jail.
+        default: false
+    swornjail.reload:
+        description: Allows user to reload jail.
+        default: op
