@@ -17,7 +17,6 @@
  */
 package de.bangl.WGJails.objects;
 
-import de.bangl.WGJails.Config;
 import org.bukkit.Location;
 
 /**
@@ -30,7 +29,7 @@ public class InmateEntry {
     private boolean jailed = true;
     private long time;
     private String reason;
-    private boolean muted;
+    private boolean muted = true;
     private String jailer;
     private transient Location lastLocation;
     private transient long lastActivity = 0L;
@@ -38,14 +37,9 @@ public class InmateEntry {
     public InmateEntry() { }
 
     public InmateEntry(long time, String reason, String jailer) {
-        this(time, reason, jailer, Config.inmatesMutedUponJail);
-    }
-
-    public InmateEntry(long time, String reason, String jailer, boolean muted) {
         this.time = time;
         this.reason = reason;
         this.jailer = jailer;
-        this.muted = muted;
     }
 
     public boolean isJailed() {

@@ -17,7 +17,6 @@
  */
 package de.bangl.WGJails.threads;
 
-import de.bangl.WGJails.Config;
 import de.bangl.WGJails.WGJailsPlugin;
 import de.bangl.WGJails.core.threads.SThread;
 import de.bangl.WGJails.objects.InmateEntry;
@@ -46,10 +45,12 @@ public class InmateCounterThread extends SThread {
             InmateEntry entry = WGJailsPlugin.inmates.getInmate(p.getName());
             long lastSpam = 0;
 
-            while (WGJailsPlugin.enabled && entry.isJailed() && p.isOnline()) {
+            while (WGJailsPlugin.enabled && entry.isJailed()
+                    && p.isOnline()) {
                 Thread.sleep(1000);
                 long now = System.currentTimeMillis();
-                if (Config.inmatesTimeDoesNotCountDownWhileAFK && now - entry.getLastActivity() > 30000L && now - lastSpam > 20000L) {
+                if (now - entry.getLastActivity() > 30000L
+                        && now - lastSpam > 20000L) {
                     lastSpam = now;
                     Bukkit.getScheduler().scheduleSyncDelayedTask(WGJailsPlugin.p, new Runnable() {
                         @Override

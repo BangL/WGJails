@@ -17,7 +17,6 @@
  */
 package de.bangl.WGJails.listeners;
 
-import de.bangl.WGJails.Config;
 import de.bangl.WGJails.WGJailsPlugin;
 import de.bangl.WGJails.threads.InmateCounterThread;
 import org.bukkit.ChatColor;
@@ -58,7 +57,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler (priority = EventPriority.LOWEST)
     public void onPlayerDropItem(PlayerDropItemEvent e) {	
-        if (WGJailsPlugin.inmatemanager.isJailed(e.getPlayer()) && Config.inmatesCannotDropItems) {
+        if (WGJailsPlugin.inmatemanager.isJailed(e.getPlayer())) {
             e.setCancelled(true);
             e.getPlayer().sendMessage(ChatColor.RED + WGJailsPlugin.lang.getMessage("cannotdropitems"));
         }

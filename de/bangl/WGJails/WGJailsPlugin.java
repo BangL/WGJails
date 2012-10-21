@@ -23,7 +23,6 @@ import de.bangl.WGJails.commands.SJCommandRoot;
 import de.bangl.WGJails.core.SPlugin;
 import de.bangl.WGJails.lang.Lang;
 import de.bangl.WGJails.listeners.ActivityListener;
-import de.bangl.WGJails.listeners.BlockListener;
 import de.bangl.WGJails.listeners.PlayerListener;
 import de.bangl.WGJails.objects.SimpleVector;
 import de.bangl.WGJails.threads.InmateCounterThread;
@@ -51,22 +50,27 @@ public class WGJailsPlugin extends SPlugin {
         preEnable();
         ConfigurationSerialization.registerClass(SimpleVector.class);
 
-        // Required dependencies
+        // Get Required dependencies
         pluginWorldGuard = Utils.getWorldGuard(this);
         pluginWGCustomFlags = Utils.getWGCustomFlags(this);
 
-        lang = new Lang();
-        Lang.load();
-        Config.load();
-        log("Config loaded!");
-        jail = new Jail();
-        log("Jail loaded!");
-        inmates = new Inmates();	
-        inmatemanager = new InmateManager();
-        commandRoot = new SJCommandRoot();
-
         // Check for optional dependencies
         hasWGCommandFlags = this.getServer().getPluginManager().getPlugin("WGCommandFlags") != null;
+
+        // Message Strings
+        lang = new Lang();
+        Lang.load();
+
+        // Jail
+        jail = new Jail();
+        log("Jail loaded!");
+
+        // Inmates
+        inmates = new Inmates();	
+        inmatemanager = new InmateManager();
+
+        // Commands
+        commandRoot = new SJCommandRoot();
 
         registerEvents();
 
@@ -96,9 +100,7 @@ public class WGJailsPlugin extends SPlugin {
             @Override
             public void run() {
                 Bukkit.getPluginManager().registerEvents(new ActivityListener(), WGJailsPlugin.p);
-                Bukkit.getPluginManager().registerEvents(new PlayerListener(), WGJailsPlugin.p);	
-                if (Config.blockProtectionEnabled)
-                    Bukkit.getPluginManager().registerEvents(new BlockListener(), WGJailsPlugin.p);
+                Bukkit.getPluginManager().registerEvents(new PlayerListener(), WGJailsPlugin.p);
             }
         });
     }
