@@ -37,6 +37,7 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
  */
 public class PlayerListener implements Listener {
 
+    // Teleport back to jail or release from jail on Player Join
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (WGJailsPlugin.inmatemanager.inJailList(e.getPlayer())) {
@@ -48,6 +49,7 @@ public class PlayerListener implements Listener {
         }
     }
 
+    // Cancel picking up of items
     @EventHandler (priority = EventPriority.LOWEST)
     public void onPlayerPickupItem(PlayerPickupItemEvent e) {
         if (WGJailsPlugin.inmatemanager.isJailed(e.getPlayer())) {
@@ -55,6 +57,7 @@ public class PlayerListener implements Listener {
         } 
     }
 
+    // Cancel dropping of items
     @EventHandler (priority = EventPriority.LOWEST)
     public void onPlayerDropItem(PlayerDropItemEvent e) {	
         if (WGJailsPlugin.inmatemanager.isJailed(e.getPlayer())) {
@@ -63,6 +66,7 @@ public class PlayerListener implements Listener {
         }
     }
 
+    // Cancel chatting
     @EventHandler (priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
@@ -74,10 +78,13 @@ public class PlayerListener implements Listener {
         }
     }
 
+    // Cancel command execution
     @EventHandler (priority = EventPriority.LOWEST)
     public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         if (WGJailsPlugin.inmatemanager.isJailed(player)) {
+            // Let WGCommandFlags check if this command is allowed in jail, if available
+            // and always allow /jailstatus
             if ((!WGJailsPlugin.hasWGCommandFlags
                     || !de.bangl.wgcf.Utils.cmdAllowedAtLocation(WGJailsPlugin.pluginWorldGuard, event.getMessage().substring(1), player.getLocation()))
                     && !event.getMessage().equalsIgnoreCase("/jailstatus")) {

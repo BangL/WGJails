@@ -17,6 +17,9 @@
  */
 package de.bangl.WGJails.core.util;
 
+import com.mewin.WGCustomFlags.WGCustomFlagsPlugin;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import de.bangl.WGJails.WGJailsPlugin;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -28,6 +31,7 @@ import java.util.regex.Pattern;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 /**
  *
@@ -157,5 +161,21 @@ public class Util {
             }
         }
         throw new Exception("badtime");
+    }
+
+    public static WGCustomFlagsPlugin getWGCustomFlags(WGJailsPlugin plugin) {
+        final Plugin wgcfp = plugin.getServer().getPluginManager().getPlugin("WGCustomFlags");
+        if (wgcfp == null || !(wgcfp instanceof WGCustomFlagsPlugin)) {
+            return null;
+        }
+        return (WGCustomFlagsPlugin)wgcfp;
+    }
+
+    public static WorldGuardPlugin getWorldGuard(WGJailsPlugin plugin) {
+        final Plugin wgp = plugin.getServer().getPluginManager().getPlugin("WorldGuard");
+        if (wgp == null || !(wgp instanceof WorldGuardPlugin)) {
+            return null;
+        }
+        return (WorldGuardPlugin)wgp;
     }
 }

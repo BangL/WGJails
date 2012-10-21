@@ -21,6 +21,7 @@ import com.mewin.WGCustomFlags.WGCustomFlagsPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import de.bangl.WGJails.commands.SJCommandRoot;
 import de.bangl.WGJails.core.SPlugin;
+import de.bangl.WGJails.core.util.Util;
 import de.bangl.WGJails.lang.Lang;
 import de.bangl.WGJails.listeners.ActivityListener;
 import de.bangl.WGJails.listeners.PlayerListener;
@@ -51,8 +52,8 @@ public class WGJailsPlugin extends SPlugin {
         ConfigurationSerialization.registerClass(SimpleVector.class);
 
         // Get Required dependencies
-        pluginWorldGuard = Utils.getWorldGuard(this);
-        pluginWGCustomFlags = Utils.getWGCustomFlags(this);
+        pluginWorldGuard = Util.getWorldGuard(this);
+        pluginWGCustomFlags = Util.getWGCustomFlags(this);
 
         // Check for optional dependencies
         hasWGCommandFlags = this.getServer().getPluginManager().getPlugin("WGCommandFlags") != null;
