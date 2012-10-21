@@ -56,11 +56,9 @@ public class Lang extends SLang {
         messages.add("muted: You can't talk while muted.");
         messages.add("cannotusecommands: You cannot use commands while in jail.");
 
-        messages.add("jailset1: Please stand in one corner of the jail and use /jailset.");
-        messages.add("jailset2: Please stand in the opposite corner of the jail and use /jailset.");
-        messages.add("jailset3: Now stand where you want inmates to warp to and use /jailset.");
-        messages.add("jailset4: Finally stand where you want users to teleport when they are released and use /jailset.");
-        messages.add("jailset5: Jail successfully created!");
+        messages.add("jailset1: Please stand where you want inmates to warp to and use /jailset.");
+        messages.add("jailset2: Now stand where you want users to teleport when they are released and use /jailset.");
+        messages.add("jailset3: Jail successfully created!");
 
         errorMessages.add("doesnotexist: %s doesn't exist!");
         errorMessages.add("notjailed: %s is not in jail.");

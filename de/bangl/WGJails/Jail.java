@@ -31,8 +31,8 @@ import org.bukkit.util.Vector;
  * @author BangL <henno.rickowski@googlemail.com>
  */
 public class Jail {
-    private transient int jailStage = 0;
-    private SimpleVector max, min, spawn, exit;
+    private transient JailStage jailStage = JailStage.REGION_DEFINED;
+    private SimpleVector spawn, exit;
     private int spawnyaw, exityaw;
     private transient World w = Bukkit.getWorlds().get(0);
     private String worldname = new String();
@@ -41,29 +41,8 @@ public class Jail {
         load();
     }
 
-    public int getJailStage() {
+    public JailStage getJailStage() {
         return jailStage;
-    }
-
-    public void nextJailStage() {
-        jailStage++;
-        if (jailStage > 4) {
-            this.resetJailStage();
-        }
-    }
-
-    public void resetJailStage() {
-        jailStage = 0;
-    }
-
-    public void setMax(Vector v1) {
-        Vector v2 = this.min.toVector();
-        this.min = new SimpleVector(Vector.getMinimum(v1, v2));
-        this.max = new SimpleVector(Vector.getMaximum(v1, v2));
-    }
-
-    public void setMin(Vector min) {
-        this.min = new SimpleVector(min); this.max = null;
     }
 
     public World getWorld() {
@@ -95,28 +74,22 @@ public class Jail {
     }
 
     public boolean isJailSetup() {
-        if (max == null
-                || min == null
-                || spawn == null
+        
+        //TODO: Implement jail setup check
+        
+        if (spawn == null
                 || exit == null
-                || w == null
-                || max.equals(min)) {
+                || w == null) {
             return false;
         }
         return true;
     }
 
     public boolean isInside(Location l) {
-        SimpleVector v = new SimpleVector(l);
-        if (min.x > v.x
-                || min.y > v.y
-                || min.z > v.z
-                || v.x > max.x
-                || v.y > max.y
-                || v.z > max.z) {
-            return false;
-        }
-        return true;
+
+        //TODO: Implement jail setup check
+
+        return false;
     }
 
     public void load() {
@@ -129,10 +102,8 @@ public class Jail {
         if (!f.exists()) {
             f = new File(WGJailsPlugin.p.getDataFolder(), "config.yml");
             if (f.exists()) {
-                SPersist.load(this, Jail.class, "jail.txt");
+        SPersist.load(this, Jail.class, "jail.txt");
 
-                this.setMin(WGJailsPlugin.p.getConfig().getVector("jailregion.jailmin"));
-                this.setMax(WGJailsPlugin.p.getConfig().getVector("jailregion.jailmax"));
                 World w = Bukkit.getWorld(WGJailsPlugin.p.getConfig().getString("jailregion.jailworld"));
                 this.setWorld((w != null) ? w : Bukkit.getWorlds().get(0));
                 Vector spawn = WGJailsPlugin.p.getConfig().getVector("jailregion.jailspawn");
