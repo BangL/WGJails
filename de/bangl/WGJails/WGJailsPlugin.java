@@ -19,6 +19,7 @@ package de.bangl.WGJails;
 
 import com.mewin.WGCustomFlags.WGCustomFlagsPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.flags.StringFlag;
 import de.bangl.WGJails.commands.SJCommandRoot;
 import de.bangl.WGJails.core.SPlugin;
 import de.bangl.WGJails.core.util.Util;
@@ -46,17 +47,39 @@ public class WGJailsPlugin extends SPlugin {
     public static WGCustomFlagsPlugin pluginWGCustomFlags;
     public static WorldGuardPlugin pluginWorldGuard;
 
+    public static final StringFlag FLAG_JAIL = new StringFlag("jail");
+    public void registerCustomFlags() {
+        pluginWGCustomFlags.addCustomFlag(FLAG_JAIL);
+    }
+
     @Override
-    public void onEnable() {
+    public void onEnable() {  
         preEnable();
         ConfigurationSerialization.registerClass(SimpleVector.class);
 
         // Get Required dependencies
         pluginWorldGuard = Util.getWorldGuard(this);
+        if (pluginWorldGuard == null) {
+            getLogger().warning("This plugin requires WorldGuard, disabling.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
         pluginWGCustomFlags = Util.getWGCustomFlags(this);
+        if (pluginWGCustomFlags == null) {
+            getLogger().warning("This plugin requires WorldGuard Custom Flags, disabling.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
         // Check for optional dependencies
         hasWGCommandFlags = this.getServer().getPluginManager().getPlugin("WGCommandFlags") != null;
+        if (hasWGCommandFlags) {
+            getLogger().info("Successfully hooked into WGCommandFlags for command whitelisting in jails.");
+        } else {
+            getLogger().info("WGCommandFlags not found. command whitelisting in jails disabled.");
+        }
+
+        registerCustomFlags();
 
         // Message Strings
         lang = new Lang();

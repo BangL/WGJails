@@ -67,7 +67,7 @@ public class InmateManager {
             } 
 
             //Teleport the new inmate into jail and notify them.
-            p.teleport(WGJailsPlugin.jail.getSpawn());
+            p.teleport(WGJailsPlugin.jail.getFreeCell());
             msg(p, WGJailsPlugin.lang.getMessage("jail"), reason, jailer);
 
             //Begin thread to count down this inmates jail time.

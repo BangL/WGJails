@@ -46,7 +46,7 @@ public class JailRelocateThread extends SThread {
                         OfflinePlayer p = Bukkit.getOfflinePlayer(entry.getKey());
                         if (p.isOnline()) {
                             if (!WGJailsPlugin.jail.isInside(p.getPlayer().getLocation())) {
-                                p.getPlayer().teleport(WGJailsPlugin.jail.getSpawn());
+                                p.getPlayer().teleport(WGJailsPlugin.jail.getFreeCell());
                                 WGJailsPlugin.inmatemanager.msg(p.getPlayer(), WGJailsPlugin.lang.getMessage("escape"));
                             }
                         }

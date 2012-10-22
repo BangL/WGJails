@@ -51,7 +51,7 @@ public class CmdSet extends SJCommand {
         if (WGJailsPlugin.jail.getJailStage() == JailStage.REGION_DEFINED) {
             confirmMessage(WGJailsPlugin.lang.getMessage("jailset1"));
         } else if(WGJailsPlugin.jail.getJailStage() == JailStage.SPAWN_SET) {
-            WGJailsPlugin.jail.setSpawn(l);
+            WGJailsPlugin.jail.addCell(l);
             msg(ChatColor.RED + "Jail spawn set!");
             confirmMessage(WGJailsPlugin.lang.getMessage("jailset2"));
         } else if(WGJailsPlugin.jail.getJailStage() == JailStage.EXIT_SET) {
